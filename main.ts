@@ -109,82 +109,88 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         controller.moveSprite(mySprite, 100, 100)
     }
     if (Phire == true) {
-        if (Up == 1) {
-            projectile = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . f f f f f . . . . . 
-                . . . . f f f 2 2 2 f f f . . . 
-                . . . f f 2 2 2 2 2 4 4 f . . . 
-                . . f f 4 4 2 4 4 2 2 4 f . . . 
-                . . f 2 4 2 4 5 4 4 2 2 f f . . 
-                . . f 2 4 4 2 4 5 4 2 2 2 f . . 
-                . . f 2 4 2 2 2 4 5 2 4 2 f . . 
-                . . f f 2 2 4 5 4 5 2 4 2 f . . 
-                . . f 2 2 2 2 4 5 4 2 2 2 f . . 
-                . . f f f 2 2 2 2 4 2 f f f . . 
-                . . . . f f 4 2 2 2 2 2 f . . . 
-                . . . . . f f f f f f f f . . . 
-                . . . . . . . . . . . . . . . . 
-                `, mySprite, 0, -50)
-        } else if (Down == 1) {
-            projectile = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . f f f f f . . . . . 
-                . . . . f f f 2 2 2 f f f . . . 
-                . . . f f 2 2 2 2 2 4 4 f . . . 
-                . . f f 4 4 2 4 4 2 2 4 f . . . 
-                . . f 2 4 2 4 5 4 4 2 2 f f . . 
-                . . f 2 4 4 2 4 5 4 2 2 2 f . . 
-                . . f 2 4 2 2 2 4 5 2 4 2 f . . 
-                . . f f 2 2 4 5 4 5 2 4 2 f . . 
-                . . f 2 2 2 2 4 5 4 2 2 2 f . . 
-                . . f f f 2 2 2 2 4 2 f f f . . 
-                . . . . f f 4 2 2 2 2 2 f . . . 
-                . . . . . f f f f f f f f . . . 
-                . . . . . . . . . . . . . . . . 
-                `, mySprite, 0, 60)
-        } else if (Left == 1) {
-            projectile = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . f f f f f . . . . . 
-                . . . . f f f 2 2 2 f f f . . . 
-                . . . f f 2 2 2 2 2 4 4 f . . . 
-                . . f f 4 4 2 4 4 2 2 4 f . . . 
-                . . f 2 4 2 4 5 4 4 2 2 f f . . 
-                . . f 2 4 4 2 4 5 4 2 2 2 f . . 
-                . . f 2 4 2 2 2 4 5 2 4 2 f . . 
-                . . f f 2 2 4 5 4 5 2 4 2 f . . 
-                . . f 2 2 2 2 4 5 4 2 2 2 f . . 
-                . . f f f 2 2 2 2 4 2 f f f . . 
-                . . . . f f 4 2 2 2 2 2 f . . . 
-                . . . . . f f f f f f f f . . . 
-                . . . . . . . . . . . . . . . . 
-                `, mySprite, -50, 0)
-        } else if (Right == 1) {
-            projectile = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . f f f f f . . . . . 
-                . . . . f f f 2 2 2 f f f . . . 
-                . . . f f 2 2 2 2 2 4 4 f . . . 
-                . . f f 4 4 2 4 4 2 2 4 f . . . 
-                . . f 2 4 2 4 5 4 4 2 2 f f . . 
-                . . f 2 4 4 2 4 5 4 2 2 2 f . . 
-                . . f 2 4 2 2 2 4 5 2 4 2 f . . 
-                . . f f 2 2 4 5 4 5 2 4 2 f . . 
-                . . f 2 2 2 2 4 5 4 2 2 2 f . . 
-                . . f f f 2 2 2 2 4 2 f f f . . 
-                . . . . f f 4 2 2 2 2 2 f . . . 
-                . . . . . f f f f f f f f . . . 
-                . . . . . . . . . . . . . . . . 
-                `, mySprite, 50, 0)
+        if (spellsopen != true) {
+            if (Up == 1) {
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . f f f f f . . . . . 
+                    . . . . f f f 2 2 2 f f f . . . 
+                    . . . f f 2 2 2 2 2 4 4 f . . . 
+                    . . f f 4 4 2 4 4 2 2 4 f . . . 
+                    . . f 2 4 2 4 5 4 4 2 2 f f . . 
+                    . . f 2 4 4 2 4 5 4 2 2 2 f . . 
+                    . . f 2 4 2 2 2 4 5 2 4 2 f . . 
+                    . . f f 2 2 4 5 4 5 2 4 2 f . . 
+                    . . f 2 2 2 2 4 5 4 2 2 2 f . . 
+                    . . f f f 2 2 2 2 4 2 f f f . . 
+                    . . . . f f 4 2 2 2 2 2 f . . . 
+                    . . . . . f f f f f f f f . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, mySprite, 0, -50)
+                projectile.setKind(SpriteKind.Playerprojectile)
+            } else if (Down == 1) {
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . f f f f f . . . . . 
+                    . . . . f f f 2 2 2 f f f . . . 
+                    . . . f f 2 2 2 2 2 4 4 f . . . 
+                    . . f f 4 4 2 4 4 2 2 4 f . . . 
+                    . . f 2 4 2 4 5 4 4 2 2 f f . . 
+                    . . f 2 4 4 2 4 5 4 2 2 2 f . . 
+                    . . f 2 4 2 2 2 4 5 2 4 2 f . . 
+                    . . f f 2 2 4 5 4 5 2 4 2 f . . 
+                    . . f 2 2 2 2 4 5 4 2 2 2 f . . 
+                    . . f f f 2 2 2 2 4 2 f f f . . 
+                    . . . . f f 4 2 2 2 2 2 f . . . 
+                    . . . . . f f f f f f f f . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, mySprite, 0, 60)
+                projectile.setKind(SpriteKind.Playerprojectile)
+            } else if (Left == 1) {
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . f f f f f . . . . . 
+                    . . . . f f f 2 2 2 f f f . . . 
+                    . . . f f 2 2 2 2 2 4 4 f . . . 
+                    . . f f 4 4 2 4 4 2 2 4 f . . . 
+                    . . f 2 4 2 4 5 4 4 2 2 f f . . 
+                    . . f 2 4 4 2 4 5 4 2 2 2 f . . 
+                    . . f 2 4 2 2 2 4 5 2 4 2 f . . 
+                    . . f f 2 2 4 5 4 5 2 4 2 f . . 
+                    . . f 2 2 2 2 4 5 4 2 2 2 f . . 
+                    . . f f f 2 2 2 2 4 2 f f f . . 
+                    . . . . f f 4 2 2 2 2 2 f . . . 
+                    . . . . . f f f f f f f f . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, mySprite, -50, 0)
+                projectile.setKind(SpriteKind.Playerprojectile)
+            } else if (Right == 1) {
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . f f f f f . . . . . 
+                    . . . . f f f 2 2 2 f f f . . . 
+                    . . . f f 2 2 2 2 2 4 4 f . . . 
+                    . . f f 4 4 2 4 4 2 2 4 f . . . 
+                    . . f 2 4 2 4 5 4 4 2 2 f f . . 
+                    . . f 2 4 4 2 4 5 4 2 2 2 f . . 
+                    . . f 2 4 2 2 2 4 5 2 4 2 f . . 
+                    . . f f 2 2 4 5 4 5 2 4 2 f . . 
+                    . . f 2 2 2 2 4 5 4 2 2 2 f . . 
+                    . . f f f 2 2 2 2 4 2 f f f . . 
+                    . . . . f f 4 2 2 2 2 2 f . . . 
+                    . . . . . f f f f f f f f . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, mySprite, 50, 0)
+                projectile.setKind(SpriteKind.Playerprojectile)
+            }
         }
     } else if (Lignig == true) {
         if (spellsopen != true) {
@@ -719,6 +725,7 @@ statusbars.onZero(StatusBarKind.Bigguyhealth, function (status) {
         `))
     info.changeScoreBy(25)
     spell[0] = miniMenu.createMenuItem("phire", assets.image`myImage2`)
+    phire_on = true
 })
 sprites.onOverlap(SpriteKind.Playerprojectile, SpriteKind.Dummy, function (sprite, otherSprite) {
     Dummy_killed += 1
@@ -873,6 +880,7 @@ controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
                                 Phire = true
                                 Lignig = false
                                 None = false
+                                Phire = true
                             }
                         } else if (selectedIndex == 1) {
                             if (lignig_on == true) {
@@ -972,8 +980,8 @@ let Damage4 = false
 let Minimapopen = false
 let Shop_is_open = false
 let projectile2: Sprite = null
-let spellsopen = false
 let projectile: Sprite = null
+let spellsopen = false
 let None = false
 let Lignig = false
 let Phire = false
