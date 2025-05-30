@@ -12,85 +12,6 @@ namespace StatusBarKind {
     export const Bigguyhealth = StatusBarKind.create()
     export const Playerhealth = StatusBarKind.create()
 }
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile0`, function (sprite, location) {
-    tiles.setCurrentTilemap(tilemap`level4`)
-    Houseenemy = true
-    tiles.placeOnRandomTile(mySprite, assets.tile`myTile2`)
-    if (Enemy_gone == false) {
-        if (Hardmode == true) {
-            My_enemy = sprites.create(img`
-                ........................
-                ........................
-                ........................
-                ........................
-                ..........ffff..........
-                ........ff1111ff........
-                .......fb111111bf.......
-                .......f11111111f.......
-                ......fd11111111df......
-                ......fd11111111df......
-                ......fddd1111dddf......
-                ......fbdbfddfbdbf......
-                ......fcdcf11fcdcf......
-                .......fb111111bf.......
-                ......fffcdb1bdffff.....
-                ....fc111cbfbfc111cf....
-                ....f1b1b1ffff1b1b1f....
-                ....fbfbffffffbfbfbf....
-                .........ffffff.........
-                ...........fff..........
-                ........................
-                ........................
-                ........................
-                ........................
-                `, SpriteKind.Enemy)
-            tiles.placeOnRandomTile(My_enemy, assets.tile`Floor`)
-            My_enemy.follow(mySprite, 60)
-            statusbar2 = statusbars.create(30, 4, StatusBarKind.Houseenemyhealth)
-            Enemyhealth1 = true
-            statusbar2.attachToSprite(My_enemy)
-            statusbar2.setColor(7, 2)
-            statusbar2.setBarBorder(0.5, 15)
-        } else {
-            My_enemy = sprites.create(img`
-                ........................
-                ........................
-                ........................
-                ........................
-                ..........ffff..........
-                ........ff1111ff........
-                .......fb111111bf.......
-                .......f11111111f.......
-                ......fd11111111df......
-                ......fd11111111df......
-                ......fddd1111dddf......
-                ......fbdbfddfbdbf......
-                ......fcdcf11fcdcf......
-                .......fb111111bf.......
-                ......fffcdb1bdffff.....
-                ....fc111cbfbfc111cf....
-                ....f1b1b1ffff1b1b1f....
-                ....fbfbffffffbfbfbf....
-                .........ffffff.........
-                ...........fff..........
-                ........................
-                ........................
-                ........................
-                ........................
-                `, SpriteKind.Enemy)
-            tiles.placeOnRandomTile(My_enemy, assets.tile`Floor`)
-            My_enemy.follow(mySprite, 50)
-            statusbar2 = statusbars.create(20, 4, StatusBarKind.Houseenemyhealth)
-            Enemyhealth1 = true
-            statusbar2.attachToSprite(My_enemy)
-            statusbar2.setColor(7, 2)
-            statusbar2.setBarBorder(0.5, 15)
-        }
-    }
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, location) {
-	
-})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     Up = 1
     Down = 0
@@ -105,7 +26,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (SH_open == true) {
         myMenu6.close()
         SH_open = false
-        tiles.placeOnRandomTile(mySprite, assets.tile`myTile23`)
+        tiles.placeOnRandomTile(mySprite, assets.tile`transparency16`)
         controller.moveSprite(mySprite, 100, 100)
     }
     if (Phire == true) {
@@ -451,10 +372,113 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`Floor0`, function (sprite, lo
 statusbars.onZero(StatusBarKind.Playerhealth, function (status) {
 	
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
+    Heal = true
+})
 sprites.onOverlap(SpriteKind.Boss, SpriteKind.Player, function (sprite, otherSprite) {
     Damage = true
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile22`, function (sprite, location) {
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (spellsopen != true) {
+        if (OptionsOpen != true || Shop_is_open != true) {
+            if (SH_open != true) {
+                if (Minimapopen != true) {
+                    if (Up == 1) {
+                        projectile = sprites.createProjectileFromSprite(img`
+                            . . . . . . . 7 . . . . . . . . 
+                            . . . . . . 7 9 7 . . . . . . . 
+                            . . . . . . 7 9 7 . . . . . . . 
+                            . . . . . . 7 9 7 . . . . . . . 
+                            . . . . . . 7 9 7 . . . . . . . 
+                            . . . . . . 7 9 7 . . . . . . . 
+                            . . . . . . 7 9 7 . . . . . . . 
+                            . . . . . . 7 9 7 . . . . . . . 
+                            . . . . . . 7 9 7 . . . . . . . 
+                            . . . . . . 7 9 7 . . . . . . . 
+                            . . . . . f f f f f . . . . . . 
+                            . . . . . . f f f . . . . . . . 
+                            . . . . . . . f . . . . . . . . 
+                            . . . . . . . f . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            `, mySprite, 0, -50)
+                        projectile.setKind(SpriteKind.Playerprojectile)
+                    } else if (Down == 1) {
+                        projectile = sprites.createProjectileFromSprite(img`
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . f . . . . . . . 
+                            . . . . . . . . f . . . . . . . 
+                            . . . . . . . f f f . . . . . . 
+                            . . . . . . f f f f f . . . . . 
+                            . . . . . . . 7 9 7 . . . . . . 
+                            . . . . . . . 7 9 7 . . . . . . 
+                            . . . . . . . 7 9 7 . . . . . . 
+                            . . . . . . . 7 9 7 . . . . . . 
+                            . . . . . . . 7 9 7 . . . . . . 
+                            . . . . . . . 7 9 7 . . . . . . 
+                            . . . . . . . 7 9 7 . . . . . . 
+                            . . . . . . . 7 9 7 . . . . . . 
+                            . . . . . . . 7 9 7 . . . . . . 
+                            . . . . . . . . 7 . . . . . . . 
+                            `, mySprite, 0, 50)
+                        projectile.setKind(SpriteKind.Playerprojectile)
+                    } else if (Left == 1) {
+                        projectile = sprites.createProjectileFromSprite(img`
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . f . . . . . 
+                            . 7 7 7 7 7 7 7 7 7 f f . . . . 
+                            7 9 9 9 9 9 9 9 9 9 f f f f . . 
+                            . 7 7 7 7 7 7 7 7 7 f f . . . . 
+                            . . . . . . . . . . f . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            `, mySprite, -50, 0)
+                        projectile.setKind(SpriteKind.Playerprojectile)
+                    } else if (Right == 1) {
+                        projectile = sprites.createProjectileFromSprite(img`
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . f . . . . . . . . . . 
+                            . . . . f f 7 7 7 7 7 7 7 7 7 . 
+                            . . f f f f 9 9 9 9 9 9 9 9 9 7 
+                            . . . . f f 7 7 7 7 7 7 7 7 7 . 
+                            . . . . . f . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            `, mySprite, 50, 0)
+                        projectile.setKind(SpriteKind.Playerprojectile)
+                    }
+                }
+            }
+        }
+    }
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Player, function (sprite, otherSprite) {
+    Damage4 = true
+})
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    Up = 0
+    Down = 0
+    Left = 1
+    Right = 0
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite, location) {
     if (SH_open == false) {
         myMenu6 = miniMenu.createMenuFromArray([
         miniMenu.createMenuItem("apple $2", img`
@@ -577,106 +601,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile22`, function (sprite, 
         controller.moveSprite(mySprite, 0, 0)
     }
 })
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (spellsopen != true) {
-        if (OptionsOpen != true || Shop_is_open != true) {
-            if (SH_open != true) {
-                if (Minimapopen != true) {
-                    if (Up == 1) {
-                        projectile = sprites.createProjectileFromSprite(img`
-                            . . . . . . . 7 . . . . . . . . 
-                            . . . . . . 7 9 7 . . . . . . . 
-                            . . . . . . 7 9 7 . . . . . . . 
-                            . . . . . . 7 9 7 . . . . . . . 
-                            . . . . . . 7 9 7 . . . . . . . 
-                            . . . . . . 7 9 7 . . . . . . . 
-                            . . . . . . 7 9 7 . . . . . . . 
-                            . . . . . . 7 9 7 . . . . . . . 
-                            . . . . . . 7 9 7 . . . . . . . 
-                            . . . . . . 7 9 7 . . . . . . . 
-                            . . . . . f f f f f . . . . . . 
-                            . . . . . . f f f . . . . . . . 
-                            . . . . . . . f . . . . . . . . 
-                            . . . . . . . f . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            `, mySprite, 0, -50)
-                        projectile.setKind(SpriteKind.Playerprojectile)
-                    } else if (Down == 1) {
-                        projectile = sprites.createProjectileFromSprite(img`
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . f . . . . . . . 
-                            . . . . . . . . f . . . . . . . 
-                            . . . . . . . f f f . . . . . . 
-                            . . . . . . f f f f f . . . . . 
-                            . . . . . . . 7 9 7 . . . . . . 
-                            . . . . . . . 7 9 7 . . . . . . 
-                            . . . . . . . 7 9 7 . . . . . . 
-                            . . . . . . . 7 9 7 . . . . . . 
-                            . . . . . . . 7 9 7 . . . . . . 
-                            . . . . . . . 7 9 7 . . . . . . 
-                            . . . . . . . 7 9 7 . . . . . . 
-                            . . . . . . . 7 9 7 . . . . . . 
-                            . . . . . . . 7 9 7 . . . . . . 
-                            . . . . . . . . 7 . . . . . . . 
-                            `, mySprite, 0, 50)
-                        projectile.setKind(SpriteKind.Playerprojectile)
-                    } else if (Left == 1) {
-                        projectile = sprites.createProjectileFromSprite(img`
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . f . . . . . 
-                            . 7 7 7 7 7 7 7 7 7 f f . . . . 
-                            7 9 9 9 9 9 9 9 9 9 f f f f . . 
-                            . 7 7 7 7 7 7 7 7 7 f f . . . . 
-                            . . . . . . . . . . f . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            `, mySprite, -50, 0)
-                        projectile.setKind(SpriteKind.Playerprojectile)
-                    } else if (Right == 1) {
-                        projectile = sprites.createProjectileFromSprite(img`
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . f . . . . . . . . . . 
-                            . . . . f f 7 7 7 7 7 7 7 7 7 . 
-                            . . f f f f 9 9 9 9 9 9 9 9 9 7 
-                            . . . . f f 7 7 7 7 7 7 7 7 7 . 
-                            . . . . . f . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            `, mySprite, 50, 0)
-                        projectile.setKind(SpriteKind.Playerprojectile)
-                    }
-                }
-            }
-        }
-    }
-})
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Player, function (sprite, otherSprite) {
-    Damage4 = true
-})
-controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    Up = 0
-    Down = 0
-    Left = 1
-    Right = 0
-})
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     Up = 0
     Down = 0
@@ -732,6 +656,82 @@ sprites.onOverlap(SpriteKind.Playerprojectile, SpriteKind.Dummy, function (sprit
     sprites.destroy(otherSprite, effects.ashes, 500)
     sprites.destroyAllSpritesOfKind(SpriteKind.Playerprojectile)
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`Concrete`, function (sprite, location) {
+    tiles.setCurrentTilemap(tilemap`level4`)
+    Houseenemy = true
+    tiles.placeOnRandomTile(mySprite, assets.tile`myTile`)
+    if (Enemy_gone == false) {
+        if (Hardmode == true) {
+            My_enemy = sprites.create(img`
+                ........................
+                ........................
+                ........................
+                ........................
+                ..........ffff..........
+                ........ff1111ff........
+                .......fb111111bf.......
+                .......f11111111f.......
+                ......fd11111111df......
+                ......fd11111111df......
+                ......fddd1111dddf......
+                ......fbdbfddfbdbf......
+                ......fcdcf11fcdcf......
+                .......fb111111bf.......
+                ......fffcdb1bdffff.....
+                ....fc111cbfbfc111cf....
+                ....f1b1b1ffff1b1b1f....
+                ....fbfbffffffbfbfbf....
+                .........ffffff.........
+                ...........fff..........
+                ........................
+                ........................
+                ........................
+                ........................
+                `, SpriteKind.Enemy)
+            tiles.placeOnRandomTile(My_enemy, assets.tile`transparency16`)
+            My_enemy.follow(mySprite, 60)
+            statusbar2 = statusbars.create(30, 4, StatusBarKind.Houseenemyhealth)
+            Enemyhealth1 = true
+            statusbar2.attachToSprite(My_enemy)
+            statusbar2.setColor(7, 2)
+            statusbar2.setBarBorder(0.5, 15)
+        } else {
+            My_enemy = sprites.create(img`
+                ........................
+                ........................
+                ........................
+                ........................
+                ..........ffff..........
+                ........ff1111ff........
+                .......fb111111bf.......
+                .......f11111111f.......
+                ......fd11111111df......
+                ......fd11111111df......
+                ......fddd1111dddf......
+                ......fbdbfddfbdbf......
+                ......fcdcf11fcdcf......
+                .......fb111111bf.......
+                ......fffcdb1bdffff.....
+                ....fc111cbfbfc111cf....
+                ....f1b1b1ffff1b1b1f....
+                ....fbfbffffffbfbfbf....
+                .........ffffff.........
+                ...........fff..........
+                ........................
+                ........................
+                ........................
+                ........................
+                `, SpriteKind.Enemy)
+            tiles.placeOnRandomTile(My_enemy, assets.tile`transparency16`)
+            My_enemy.follow(mySprite, 50)
+            statusbar2 = statusbars.create(20, 4, StatusBarKind.Houseenemyhealth)
+            Enemyhealth1 = true
+            statusbar2.attachToSprite(My_enemy)
+            statusbar2.setColor(7, 2)
+            statusbar2.setBarBorder(0.5, 15)
+        }
+    }
+})
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
     Damage = true
 })
@@ -740,9 +740,6 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     Down = 1
     Left = 0
     Right = 0
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
-    Heal = true
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileDarkGrass2, function (sprite, location) {
     if (Enemy_gone == true) {
@@ -909,9 +906,6 @@ scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileGrass2, function (spri
     }
     Entered_boss = false
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`transparency16`, function (sprite, location) {
-	
-})
 sprites.onOverlap(SpriteKind.Playerprojectile, SpriteKind.Boss, function (sprite, otherSprite) {
     if (sprite == projectile) {
         Damage_3 = true
@@ -973,6 +967,8 @@ let myMenu2: miniMenu.MenuSprite = null
 let Minimap: Sprite = null
 let myMenu: miniMenu.MenuSprite = null
 let Entered_boss = false
+let statusbar2: StatusBarSprite = null
+let My_enemy: Sprite = null
 let GaryOn = false
 let statusbar3: StatusBarSprite = null
 let BigGyattGary: Sprite = null
@@ -987,8 +983,6 @@ let Lignig = false
 let Phire = false
 let myMenu6: miniMenu.MenuSprite = null
 let SH_open = false
-let statusbar2: StatusBarSprite = null
-let My_enemy: Sprite = null
 let spell: miniMenu.MenuItem[] = []
 let lignig_on = false
 let phire_on = false
@@ -1317,14 +1311,14 @@ if (firstLoad == true) {
         . . . . . . e e e e . . . . . . 
         . . . . e e e e e e e e . . . . 
         `, SpriteKind.Dummy)
-    tiles.placeOnRandomTile(Traininguy1, assets.tile`myTile10`)
-    tiles.placeOnRandomTile(Traininguy2, assets.tile`myTile11`)
-    tiles.placeOnRandomTile(Traininguy3, assets.tile`myTile12`)
-    tiles.placeOnRandomTile(Traininguy4, assets.tile`myTile13`)
-    tiles.placeOnRandomTile(Traininguy5, assets.tile`myTile14`)
-    tiles.placeOnRandomTile(Traininguy6, assets.tile`myTile15`)
-    tiles.placeOnRandomTile(Traininguy7, assets.tile`myTile16`)
-    tiles.placeOnRandomTile(Traininguy8, assets.tile`myTile17`)
+    tiles.placeOnRandomTile(Traininguy1, assets.tile`myTile4`)
+    tiles.placeOnRandomTile(Traininguy2, assets.tile`myTile5`)
+    tiles.placeOnRandomTile(Traininguy3, assets.tile`myTile6`)
+    tiles.placeOnRandomTile(Traininguy4, assets.tile`myTile7`)
+    tiles.placeOnRandomTile(Traininguy5, assets.tile`myTile8`)
+    tiles.placeOnRandomTile(Traininguy6, assets.tile`myTile9`)
+    tiles.placeOnRandomTile(Traininguy7, assets.tile`myTile10`)
+    tiles.placeOnRandomTile(Traininguy8, assets.tile`myTile11`)
     game.splash("Welcome to 8-bIT world!")
     game.showLongText("First, Choose your difficulty then, go towards a dummy and press A.", DialogLayout.Bottom)
     game.showLongText("When you are done, finish off the rest", DialogLayout.Bottom)
@@ -1361,9 +1355,7 @@ if (firstLoad == true) {
     Fix = false
     IsGaryGone = false
     shop_made = false
-    Inventory = [
-    miniMenu.createMenuItem("Default tunic", assets.image`myImage0`),
-    miniMenu.createMenuItem("Empty ", img`
+    Inventory = [miniMenu.createMenuItem("Default tunic", assets.image`myImage0`), miniMenu.createMenuItem("Empty ", img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -1380,8 +1372,7 @@ if (firstLoad == true) {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
-        `),
-    miniMenu.createMenuItem("Empty", img`
+        `), miniMenu.createMenuItem("Empty", img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -1398,11 +1389,9 @@ if (firstLoad == true) {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
-        `)
-    ]
+        `)]
     OptionsOpen = false
-    myMenu3 = [
-    miniMenu.createMenuItem("Inventory", img`
+    myMenu3 = [miniMenu.createMenuItem("Inventory", img`
         . . . . . . . . . . . . . . . . 
         . f f f . . . . . . . . . . . . 
         . f 2 f . . . . . . . . . . . . 
@@ -1419,8 +1408,7 @@ if (firstLoad == true) {
         . f f f . . . . . . . . . . . . 
         . f 8 f . . . . . . . . . . . . 
         . f f f . f f f f f f f f f f . 
-        `),
-    miniMenu.createMenuItem("Map", img`
+        `), miniMenu.createMenuItem("Map", img`
         4 e e e 4 4 e e e 4 4 e e e 4 4 
         e 8 8 e e e 8 8 e e e 8 8 8 e e 
         e 8 8 e e 8 8 8 8 8 8 8 8 8 8 e 
@@ -1437,8 +1425,7 @@ if (firstLoad == true) {
         e 8 8 8 8 7 8 8 8 8 8 8 7 7 7 e 
         e e e 8 8 8 8 e e e 8 7 7 e e e 
         4 4 e e e e e e 4 e e e e e 4 4 
-        `),
-    miniMenu.createMenuItem("Spells", img`
+        `), miniMenu.createMenuItem("Spells", img`
         . . . . . . . . b b . . . . . . 
         . . . . . . . b 9 1 b . . . . . 
         . . b b . . . b 9 9 b . . . . . 
@@ -1455,8 +1442,7 @@ if (firstLoad == true) {
         . . . b 5 5 5 b . b 3 9 9 3 b . 
         . . . . b b b . . . b b b b . . 
         . . . . . . . . . . . . . . . . 
-        `)
-    ]
+        `)]
     myMenu4 = miniMenu.createMenuFromArray([miniMenu.createMenuItem("Easy", img`
         9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
         9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
@@ -1494,8 +1480,7 @@ if (firstLoad == true) {
     firstLoad = false
     phire_on = false
     lignig_on = false
-    spell = [
-    miniMenu.createMenuItem("empty", img`
+    spell = [miniMenu.createMenuItem("empty", img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -1512,8 +1497,7 @@ if (firstLoad == true) {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
-        `),
-    miniMenu.createMenuItem("empty", img`
+        `), miniMenu.createMenuItem("empty", img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -1530,8 +1514,7 @@ if (firstLoad == true) {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
-        `),
-    miniMenu.createMenuItem("none", img`
+        `), miniMenu.createMenuItem("none", img`
         . . . . 2 2 2 2 2 2 2 . . . . 
         . . 2 2 . . . . . . . 2 2 . . 
         . 2 2 . . . . . . . . . . 2 . 
@@ -1547,8 +1530,7 @@ if (firstLoad == true) {
         . 2 . . . . . . . . . . 2 2 . 
         . . 2 2 . . . . . . . 2 2 . . 
         . . . . 2 2 2 2 2 2 2 . . . . 
-        `)
-    ]
+        `)]
 }
 game.onUpdateInterval(5000, function () {
     if (IsGaryGone != true) {
@@ -1786,7 +1768,7 @@ game.onUpdateInterval(1000, function () {
 })
 game.onUpdateInterval(1, function () {
     if (statusbar.value == 0) {
-        tiles.placeOnRandomTile(mySprite, assets.tile`transparency16`)
+        tiles.placeOnRandomTile(mySprite, assets.tile`myTile8`)
         statusbar.value = 100
         tiles.setCurrentTilemap(tilemap`level2`)
     }
@@ -1819,7 +1801,7 @@ forever(function () {
         pause(500)
         game.showLongText("You did it, good job completing the tutorial ", DialogLayout.Bottom)
         tiles.setCurrentTilemap(tilemap`level0`)
-        tiles.placeOnRandomTile(mySprite, assets.tile`myTile8`)
+        tiles.placeOnRandomTile(mySprite, assets.tile`Floor0`)
         scene.cameraFollowSprite(mySprite)
         Farmer1 = sprites.create(img`
             . . . . . 5 5 5 5 5 . . . . . . 
@@ -1875,9 +1857,9 @@ forever(function () {
             . . . . . e e e e e . . . . . . 
             . . . . . e e e e e . . . . . . 
             `, SpriteKind.Sign)
-        tiles.placeOnRandomTile(Farmer1, assets.tile`Dirt`)
-        tiles.placeOnRandomTile(Farmer2, assets.tile`Dirt`)
-        tiles.placeOnRandomTile(Gossipgirl, assets.tile`myTile4`)
+        tiles.placeOnRandomTile(Farmer1, assets.tile`transparency16`)
+        tiles.placeOnRandomTile(Farmer2, assets.tile`transparency16`)
+        tiles.placeOnRandomTile(Gossipgirl, assets.tile`Bricks`)
         Farmer1.sayText("A Plentyful harvest!")
         Farmer2.sayText("A Plentyful harvest!")
         Gossipgirl.sayText("Jake’s House")
@@ -1938,7 +1920,7 @@ forever(function () {
             f 6 6 e 6 e 6 e 6 6 6 e 6 e e f 
             f f f f f f f f f f f f f f f f 
             `, SpriteKind.shop)
-        tiles.placeOnRandomTile(shop_guy, assets.tile`myTile22`)
+        tiles.placeOnRandomTile(shop_guy, assets.tile`myTile16`)
         shop_made = true
     }
 })
